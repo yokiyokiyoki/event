@@ -51,7 +51,32 @@ EventEmeitter.prototype.on = function(type, fn) {
 };
 
 //移除监听事件
-EventEmeitter.prototype.off = function(type, fn) {};
+EventEmeitter.prototype.off = function(type, fn) {
+  const handler = this._events.get(type);
+  //如果是函数，说明只监听了一次
+  if (handler && typeof handler == "function") {
+    this._events.delete(type, fn);
+  } else {
+    //如果handler是数组,那么要找到对应的fn才可以删除
+    let index = -1;
+    handler.forEach((handlerItem, handlerIndex) => {
+      if (handlerI == fn) {
+        index = handlerIndex;
+      }
+    });
+    //如果找到匹配的函数
+    if (index !== -1) {
+      handler.splice(index, 1);
+      //如果清除后只有一个函数，那么不能以数组形式保存，以单个函数
+      if (handler.length === 1) {
+        this._events.set(type, handler[0]);
+      }
+    } else {
+      //如果没有找到，返回改实例
+      return this;
+    }
+  }
+};
 
 const emitter = new EventEmeitter();
 emitter.on("hello", name => {
