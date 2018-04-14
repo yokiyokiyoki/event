@@ -29,3 +29,8 @@ EventEmeitter.prototype.on = function(type, fn) {
     this._events.set(type, fn);
   }
 };
+
+const emitter = new EventEmeitter();
+emitter.on("hello", name => {
+  console.log(`hellp ${name}`);
+});
