@@ -1,5 +1,5 @@
 //初始化class
-export class EventEmeitter {
+class EventEmeitter {
   constructor() {
     this._events = this._events || new Map(); //使用map结构存储
     this._maxListeners = this._maxListeners || 10; //设定监听上限
@@ -34,3 +34,4 @@ const emitter = new EventEmeitter();
 emitter.on("hello", name => {
   console.log(`hellp ${name}`);
 });
+emitter.emit("hello", "yoki");
