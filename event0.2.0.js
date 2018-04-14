@@ -23,6 +23,13 @@ EventEmeitter.prototype.emit = function(type, ...args) {
         item.call(this);
       }
     });
+  } else {
+    //单个函数，直接触发
+    if (args.length > 0) {
+      handler.apply(this, args);
+    } else {
+      handler.call(this);
+    }
   }
   return true;
 };
