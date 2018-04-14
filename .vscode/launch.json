@@ -16,7 +16,7 @@
       "type": "node",
       "request": "launch",
       "name": "启动程序",
-      "program": "${workspaceFolder}/event0.2.0.js"
+      "program": "${workspaceFolder}/event1.0.0.js"
     }
   ]
 }

@@ -60,7 +60,7 @@ EventEmeitter.prototype.off = function(type, fn) {
     //如果handler是数组,那么要找到对应的fn才可以删除
     let index = -1;
     handler.forEach((handlerItem, handlerIndex) => {
-      if (handlerI == fn) {
+      if (handlerItem == fn) {
         index = handlerIndex;
       }
     });
@@ -79,11 +79,14 @@ EventEmeitter.prototype.off = function(type, fn) {
 };
 
 const emitter = new EventEmeitter();
+let tmp = name => {
+  console.log(`hi ${name}`);
+};
 emitter.on("hello", name => {
   console.log(`hello ${name}`);
 });
 
-emitter.on("hello", name => {
-  console.log(`hi ${name}`);
-});
+emitter.on("hello", tmp);
+//匿名函数无法移除
+emitter.off("hello", tmp);
 emitter.emit("hello", "yoki");
