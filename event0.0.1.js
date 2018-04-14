@@ -35,3 +35,8 @@ emitter.on("hello", name => {
   console.log(`hello ${name}`);
 });
 emitter.emit("hello", "yoki");
+//但是这里有个问题，如果我监听多个呢
+emitter.on("hello", name => {
+  console.log(`hi ${name}`);
+});
+//结果只会触发hello yoki，下个版本支持多个监听者
