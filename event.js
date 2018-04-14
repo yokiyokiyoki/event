@@ -21,3 +21,11 @@ EventEmeitter.prototype.emit = function(type, ...arg) {
   }
   return true;
 };
+
+//监听type事件
+EventEmeitter.prototype.on = function(type, fn) {
+  // 将type事件和对应的fn放入存储池
+  if (this._events.get(type)) {
+    this._events.set(type, fn);
+  }
+};
