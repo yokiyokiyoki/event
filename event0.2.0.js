@@ -36,9 +36,15 @@ EventEmeitter.prototype.emit = function(type, ...args) {
 
 //监听type事件
 EventEmeitter.prototype.on = function(type, fn) {
-  // 将type事件和对应的fn放入存储池
-  if (!this._events.get(type)) {
+  const handler = this._events.get(type); //获取对应函数
+  if (!handler) {
     this._events.set(type, fn);
+  } else if (handler && typeof handler == "function") {
+    //如果本来已经有一个了,重新设置一下type的value
+    this._events.set(type, [handler, fn]);
+  } else {
+    //如果本来就是数组
+    handler.push(fn);
   }
 };
 
