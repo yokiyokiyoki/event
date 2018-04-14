@@ -10,7 +10,7 @@ class EventEmeitter {
 //触发监听函数我们可以用apply与call两种方法,在少数参数时call的性能更好,多个参数时apply性能更好,当年Node的Event模块就在三个参数以下用call否则用apply
 
 //触发type事件
-EventEmeitter.prototype.emit = function(type, ...arg) {
+EventEmeitter.prototype.emit = function(type, ...args) {
   let handler;
   //从储存池拿
   handler = this._events.get(type);
@@ -32,6 +32,6 @@ EventEmeitter.prototype.on = function(type, fn) {
 
 const emitter = new EventEmeitter();
 emitter.on("hello", name => {
-  console.log(`hellp ${name}`);
+  console.log(`hello ${name}`);
 });
 emitter.emit("hello", "yoki");
